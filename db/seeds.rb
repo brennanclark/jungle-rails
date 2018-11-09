@@ -35,7 +35,7 @@ puts "Re-creating Products ..."
 
 Product.destroy_all
 
-cat1.products.create!({
+pro1 = cat1.products.create!({
   name:  'Men\'s Classy shirt',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel1.jpg'),
@@ -130,6 +130,21 @@ cat3.products.create!({
   image: open_asset('furniture3.jpg'),
   quantity: 23,
   price: 2_483.75
+})
+
+puts "Re-creating Reviews ..."
+
+Review.destroy_all
+
+pro1.reviews.create!({
+  user_id: 1,
+  description: 'Def haunted',
+  rating: 5,
+})
+pro1.reviews.create!({
+  user_id: 1,
+  description: 'Never Mind',
+  rating: 0,
 })
 
 
