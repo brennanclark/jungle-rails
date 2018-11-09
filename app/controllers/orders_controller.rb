@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
 
+
   def show
     @order = Order.find(params[:id])
     @product = Product.all
@@ -12,6 +13,8 @@ class OrdersController < ApplicationController
     if order.valid?
       empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
+      @user = User.find(session[:user_id])
+      puts UserMailer.receipt_email(order)
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
     end
@@ -41,6 +44,7 @@ class OrdersController < ApplicationController
       email: params[:stripeEmail],
       total_cents: cart_subtotal_cents,
       stripe_charge_id: stripe_charge.id, # returned by stripe
+      user: User.find(session[:user_id]),
     )
 
     enhanced_cart.each do |entry|
