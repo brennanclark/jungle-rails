@@ -40,7 +40,7 @@
       </div>
 
       <div class="col-sm-8">
-        <dl class="dl-horizontal">
+          Review
           <% if current_user %>
               <%= form_for @review, url: "#{@product.id}/reviews", method: "POST" do |f| %>
               <%= f.select :rating, options_for_select([1, 2, 3, 4, 5]) %>
@@ -48,7 +48,6 @@
               <%= f.submit %>
             <% end %>
           <%end%>
-        </dl>
       </div>
 
     </div>
