@@ -24,6 +24,8 @@
           <dd><%= @product.price %></dd>
         </dl>
       </div>
+
+
       <div class="col-sm-8">
         <dl class="dl-horizontal">
           <dt>Reviews</dt>
@@ -36,6 +38,12 @@
           </dd>
         </dl>
       </div>
+      <%= form_for @review, url: "#{@product.id}/reviews", method: "POST" do |f| %>
+        <%= f.select :rating, options_for_select([1, 2, 3, 4, 5]) %>
+        <%= f.text_area :description %>
+        <%= f.submit %>
+      <% end %>
+
     </div>
   </article>
 
